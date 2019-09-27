@@ -34,13 +34,14 @@ def verbing(s):
 # Return the resulting string.
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
+
 def not_bad(s):
-    def not_bad(s):
-        if s.find("bad") > s.find("not"):
-            start = s.find('not')
-            end = s.find("bad") + 3
-            return s.repla[start:end], "good")
-    return
+    snot = s.find('not')
+    sbad = s.find('bad')
+    if sbad > snot:
+        s = s.replace(s[snot:(sbad+3)], 'good')
+    return s
+
 
 
 # F. front_back
@@ -51,8 +52,26 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-    # +++your code here+++
-    return
+    alenght = len(a)
+    blenght = len(b)
+    # test if the front and the back halves are the same lenght in a
+    if alenght % 2 == 0:
+        aindex = (alenght // 2)
+    else:
+        aindex = (alenght // 2) + 1
+    # test if the front and the back halves are the same lenght in b
+    if blenght % 2 == 0:
+        bindex = (blenght // 2)
+    else:
+        bindex = (blenght // 2) + 1
+    # start to organize the new words:
+    afront = a[:aindex]
+    aback = a[aindex:]
+    bfront = b[:bindex]
+    bback = b[bindex:]
+    # put it all together
+    return afront + bfront + aback + bback
+
 
 
 # Simple provided test() function used in main() to print
