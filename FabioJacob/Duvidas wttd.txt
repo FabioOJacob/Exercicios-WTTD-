@@ -1,0 +1,6 @@
+- pagina landscape.io esta fora do ar
+- sobre o virtualenv, como funciona o esquema de deletar somente o venv, meu projeto esta vinculado a ele?
+- como funciona a função setUp(), se ela não é chamada nas outras funções
+- para que serve a função subTest()
+- o que são esses arquivos .yml e onde eu vejo como configurar
+

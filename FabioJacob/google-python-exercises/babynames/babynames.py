@@ -42,8 +42,32 @@ def extract_names(filename):
     ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
     """
     # +++your code here+++
-    return
+    
+    doc = open(filename)
+    texto = doc.read()
+    doc.close()
 
+    # regex para extrair o ano e o rank + os nomes
+    rc_year = re.compile(r'(\d{4})</h3>')
+    rc_rank_boy_names = re.compile(r'<td>(\d{1,4})</td><td>(\w+)</td><td>\w+</td>')
+    rc_rank_girl_names = re.compile(r'<td>(\d{1,4})</td><td>\w+</td><td>(\w+)</td>')
+
+    # Procura os dados e guarda em listas separadas
+    year = rc_year.findall(texto)
+    boy_names = rc_rank_boy_names.findall(texto)
+    girl_names = rc_rank_girl_names.findall(texto)
+
+    all = boy_names + girl_names
+
+    l = []
+    for r, n in all:
+        n = str(n) + ' ' + str(r)
+        l.append(n)
+
+    lista = year + sorted(l)
+
+    
+    return lista
 
 def main():
     # This command-line parsing code is provided.
@@ -60,6 +84,16 @@ def main():
     if args[0] == '--summaryfile':
         summary = True
         del args[0]
+
+
+# pegando somente um nome da lista de arquivos
+    n = extract_names(args[0])
+
+    text = '\n'.join(n) + '\n'
+
+    print(text)
+
+
 
         # +++your code here+++
         # For each filename, get the names, then either print the text output

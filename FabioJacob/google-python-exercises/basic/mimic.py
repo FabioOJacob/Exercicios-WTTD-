@@ -49,6 +49,8 @@ def mimic_dict(filename):
     """Returns mimic dict mapping each word to list of words which follow it."""
     file = open(str(filename), 'r')
     words = file.read().split()
+    file.close()
+
     key = []
     value = []
 
@@ -57,19 +59,31 @@ def mimic_dict(filename):
         key.append(words[i])
         value.append(words[i+1:])
     dic_words = dict(zip(key, value))
-    file.close()
-    # print(f'DICIONÁRIO: {dic_words}')
+    for i in dic_words.items():
+        print(i)
+        print()
     return dic_words
 
 
 def print_mimic(mimic_dict, word):
     """Given mimic dict and start word, prints 200 random words."""
-    for i in mimic_dict.keys():
-        lis = mimic_dict[i]
-        if lis == []:
-            break
-        print(i)
-        print(random.choice(lis), end=' ')
+    k = list(mimic_dict.keys())
+    chave = random.choice(k) #escolhe uma chave aleatória
+    nova_frase = chave
+
+# construção do novo texto
+    conta = 0
+    while conta <= 200:
+        while mimic_dict[chave] == []:
+            chave = random.choice(k)
+
+        valor = random.choice(mimic_dict[chave]) # escolhe uma palavra na lista
+        nova_frase += ' ' + valor # primeira palavra + a palavra sorteada na lista
+        chave = valor
+        conta += 1
+        print(f'{nova_frase} ', end='')
+
+    print()
 
     return
 
@@ -82,7 +96,7 @@ def main():
 
 
     dict = mimic_dict(sys.argv[1])
-    print_mimic(dict, '')
+    # print_mimic(dict, ' ')
 
 
 if __name__ == '__main__':

@@ -38,13 +38,54 @@ print_words() and print_top().
 """
 
 import sys
-
+from operator import itemgetter
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
+
+
+def ler_arquivo(filename):
+    """ Função auxiliar para não repetir código."""
+    file = open(str(filename), 'r')
+    words = file.read().lower().split()
+    file.close()
+    count = []
+
+    for w in sorted(set(words)):        
+        conta = words.count(w)
+        count.append(conta)
+
+    dic_wordcount = dict(zip(sorted(set(words)), count))
+    return dic_wordcount
+        
+
+def print_words(filename):
+    """Função que vai listar a quantidade de vezes que as palavras aparecem no texto."""
+    dicionario = ler_arquivo(filename)
+    for c, v in dicionario.items():
+        print(f'{c:<15} = {v:0>3}')
+    
+
+def print_top(filename):
+    """ Função que mostra somente as 20 palavras mais usadas no texto."""
+    top20 = dict()
+
+    dicionario = ler_arquivo(filename)
+
+    top20 = sorted(dicionario.items(), key=itemgetter(1), reverse=True)
+
+    top = 0
+    for k, v in top20:
+        print(f'{k:<15} = {v:0>3}')
+        top += 1
+        if top == 20:
+            break
+    print()
+
+
 
 ###
 
