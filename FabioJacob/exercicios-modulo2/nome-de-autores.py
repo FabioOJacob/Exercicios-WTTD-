@@ -57,5 +57,6 @@ for i in range(num):
 print()
 print()
 
+
 lista = '\n'.join(nomes)
 print(lista)
