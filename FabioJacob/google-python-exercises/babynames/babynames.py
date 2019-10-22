@@ -86,12 +86,12 @@ def main():
         del args[0]
 
 
-# pegando somente um nome da lista de arquivos
-    n = extract_names(args[0])
 
-    text = '\n'.join(n) + '\n'
+    for x in args:
+        n = extract_names(x)
+        text = '\n'.join(n) + '\n'
 
-    print(text)
+        print(text)
 
 
 
